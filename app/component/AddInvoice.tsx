@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Invoice from "./Invoice";
+import InvoiceForm from "./InvoiceForm";
 
 type Data = {
   data: Array<string | Number>;
@@ -39,18 +40,13 @@ export default function AddInvoice({ data }: Data) {
         ))}
       </div>
       {addInvoice && (
-        <div className="bg-[#141625] fixed z-10 w-[42%] h-screen top-0 left-0 ml-[6rem] rounded-e-3xl p-16 shadow-black shadow-2xl invoice-slide-up">
-          <h1 className="text-3xl font-bold">Create Invoice</h1>
-          <div>
-            <p className="text-purple-600 text-sm font-bold my-10">Bill Info</p>
-            <label htmlFor="inputField" className="text-sm ml-1">Street Address</label>
-            <input
-              type="text"
-              id="inputField"
-              className="bg-[#1E2139] text-sm font-bold py-3 px-4 w-full rounded-md mt-2"
-            />
-          </div>
-        </div>
+        <>
+          <div
+            className="fixed w-full h-screen bg-black opacity-50 top-0 left-0"
+            onClick={() => setAddInvoice(!addInvoice)}
+          ></div>
+          <InvoiceForm />
+        </>
       )}
     </>
   );
