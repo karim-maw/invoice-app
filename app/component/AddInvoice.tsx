@@ -3,6 +3,8 @@
 import { useState } from "react";
 import Invoice from "./Invoice";
 import InvoiceForm from "./InvoiceForm";
+import { Plus } from "phosphor-react";
+import Link from "next/link";
 
 type Data = {
   data: Array<string | Number>;
@@ -24,19 +26,29 @@ export default function AddInvoice({ data }: Data) {
             className="bg-purple-600 text-sm p-3 rounded-full font-bold hover:bg-purple-500 transition-all"
             onClick={() => setAddInvoice(!addInvoice)}
           >
-            New Invoice
+            <div className="flex gap-1">
+              <Plus
+                size={20}
+                className="bg-white text-purple-600 rounded-full"
+              />
+              New Invoice
+            </div>
           </button>
         </div>
       </div>
       <div className="flex flex-col gap-4 rounded-3xl w-full sm:w-1/2">
         {data?.map((invoice: any) => (
-          <Invoice
-            id={invoice.id}
-            // date={invoice.date}
-            username={invoice.username}
-            price={invoice.price}
-            status={invoice.status}
-          />
+          <div key={invoice.id}>
+            <Link href={`/invoice/${invoice.id}`}>
+              <Invoice
+                id={invoice.id}
+                // date={invoice.date}
+                username={invoice.username}
+                price={invoice.price}
+                status={invoice.status}
+              />
+            </Link>
+          </div>
         ))}
       </div>
       {addInvoice && (
